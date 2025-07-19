@@ -21,6 +21,4 @@ class BodyMetricsUpdate(SQLModel):
     neck_cm: Optional[float] = Field(default=None, gt=0)
     waist_cm: Optional[float] = Field(default=None, gt=0)
     hips_cm: Optional[float] = Field(default=None, gt=0)
-    body_fat_pct: Optional[float] = Field(default=None, ge=0, le=100)
-    bmi: Optional[float] = Field(default=None, gt=0)
     user_id: Optional[int] = None

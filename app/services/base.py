@@ -3,6 +3,8 @@ from typing import Generic, List, Type, TypeVar
 from fastapi import HTTPException, status
 from sqlmodel import Session, select
 
+from ..models.user import User
+
 T = TypeVar("T")  # Model
 C = TypeVar("C")  # Creation schema
 U = TypeVar("U")  # Update schema
@@ -14,6 +16,12 @@ class BaseService(Generic[T, C, U]):
         self.session = session
 
     def create(self, data: C) -> T:
+        if "user_id" in self.model.__fields__:
+            if not self.session.get(User, data.user_id):
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"User with id {data.user_id} does not exist.",
+                )
         obj = self.model.model_validate(data)
         self.session.add(obj)
         self.session.commit()

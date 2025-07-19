@@ -9,11 +9,11 @@ if TYPE_CHECKING:
 
 class ExerciseLogBase(SQLModel):
     timestamp: datetime
-    exercise_type: str  # ex: "course", "musculation", "yoga"
+    exercise_type: str
     duration_min: Optional[float] = Field(default=None, gt=0)  # durée en minutes
     calories_burned_kcal: Optional[float] = Field(default=None, gt=0)
     notes: Optional[str] = None
-    user_id: int
+    user_id: int = Field(foreign_key="user.id")
 
 
 class ExerciseLog(ExerciseLogBase, table=True):

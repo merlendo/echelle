@@ -1,4 +1,5 @@
 from datetime import date
+from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
 
 from sqlmodel import Field, Relationship, SQLModel
@@ -11,9 +12,17 @@ if TYPE_CHECKING:
     from .photo_log import PhotoLog
 
 
+class Sex(str, Enum):
+    male = "male"
+    female = "female"
+
+
 class UserBase(SQLModel):
-    name: str
-    email: Optional[str] = None
+    username: str
+    first_name: str
+    last_name: str
+    email: str
+    sex: Sex
 
 
 class User(UserBase, table=True):

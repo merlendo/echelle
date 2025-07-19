@@ -11,7 +11,7 @@ class PhotoLogBase(SQLModel):
     date: date
     photo_path: str
     description: Optional[str] = None
-    user_id: int
+    user_id: int = Field(foreign_key="user.id")
 
 
 class PhotoLog(PhotoLogBase, table=True):

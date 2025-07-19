@@ -15,7 +15,7 @@ class MealPrepBase(SQLModel):
     protein_g: Optional[float] = Field(default=None, ge=0)
     carbs_g: Optional[float] = Field(default=None, ge=0)
     fat_g: Optional[float] = Field(default=None, ge=0)
-    user_id: int
+    user_id: int = Field(foreign_key="user.id")
 
 
 class MealPrep(MealPrepBase, table=True):
