@@ -6,8 +6,12 @@ from sqlmodel import Field, SQLModel
 from ..models.body_metrics import BodyMetricsBase
 
 
-class BodyMetricsCreate(BodyMetricsBase):
+class BodyMetricsCreateForm(BodyMetricsBase):
     pass
+
+
+class BodyMetricsCreate(BodyMetricsCreateForm):
+    user_id: int
 
 
 class BodyMetricsRead(BodyMetricsBase):

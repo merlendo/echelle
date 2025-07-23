@@ -3,9 +3,11 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlmodel import Session
 
-from ...core.dependencies import get_session
+from ...core.dependencies import get_session, get_user
+from ...models.user import User
 from ...schemas.body_metrics import (
     BodyMetricsCreate,
+    BodyMetricsCreateForm,
     BodyMetricsRead,
     BodyMetricsUpdate,
 )
@@ -29,8 +31,13 @@ def get(metric_id: int, service: BodyMetricsService = Depends(get_service)):
 
 
 @router.post("/", response_model=BodyMetricsRead, status_code=status.HTTP_201_CREATED)
-def create(data: BodyMetricsCreate, service: BodyMetricsService = Depends(get_service)):
-    return service.create(data)
+def create(
+    data: BodyMetricsCreateForm,
+    service: BodyMetricsService = Depends(get_service),
+    user: User = Depends(get_user),
+):
+    dto = BodyMetricsCreate(user_id=user.id, **data.model_dump())
+    return service.create(dto)
 
 
 @router.put("/{metric_id}", response_model=BodyMetricsRead)

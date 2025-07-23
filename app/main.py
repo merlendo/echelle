@@ -13,6 +13,8 @@ from .models import body_metrics, exercise_log, food_log, meal_prep, photo_log, 
 async def lifespan(app: FastAPI):
     SQLModel.metadata.create_all(engine)
     yield
+
+
 app = FastAPI(title="Echelle", lifespan=lifespan)
 
 app.include_router(api.router, prefix="/api/v1")

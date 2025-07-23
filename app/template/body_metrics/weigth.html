@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Weight{% endblock %}
+
+{% block content %}
+<div class="row valign-wrapper">
+    <div class="col s11">
+        <h2>Weight evolution</h2>
+    </div>
+    <div class="col s1">
+        <a href="#add_modal" class="btn-floating btn modal-trigger btn-large waves-effect waves-light teal lighten-3">
+            <i class="material-icons">add</i>
+        </a>
+    </div>
+</div>
+
+<div class="input-field col s12">
+    <select id="dateRangeSelector">
+        <option value="week" selected>Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+    </select>
+    <label>Date Range</label>
+</div>
+
+<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+    <button id="prevRange" class="btn-small">&larr;</button>
+    <span id="dateLabel" style="font-weight: bold;"></span>
+    <button id="nextRange" class="btn-small">&rarr;</button>
+</div>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<div id="add_modal" class="modal">
+    <form id="form">
+        <div class="modal-content">
+            <h2>Add a new weight</h2>
+            <input type="date" name="date" required>
+            <input type="number" step="0.1" name="weight" placeholder="Weight" required>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="waves-effect waves-green btn-flat">Add</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', path='js/weight.js') }}"></script>
+{% endblock %}

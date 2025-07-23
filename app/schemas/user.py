@@ -13,7 +13,6 @@ class UserCreate(UserBase):
 
 class UserRead(UserBase):
     id: int
-    email: Optional[EmailStr] = None
     created_at: Optional[date] = None
 
 

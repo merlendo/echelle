@@ -1,7 +1,6 @@
 from datetime import date
 from typing import TYPE_CHECKING, Optional
 
-from pydantic import Field as PydanticField
 from sqlmodel import Field, Relationship, SQLModel
 
 if TYPE_CHECKING:
@@ -15,13 +14,13 @@ class BodyMetricsBase(SQLModel):
     neck_cm: Optional[float] = Field(default=None, gt=0)
     waist_cm: Optional[float] = Field(default=None, gt=0)
     hips_cm: Optional[float] = Field(default=None, gt=0)
-    user_id: int = Field(foreign_key="user.id")
 
 
 class BodyMetrics(BodyMetricsBase, table=True):
     __tablename__ = "body_metrics"
 
     id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="user.id")
     user: Optional["User"] = Relationship(back_populates="body_metrics")
 
     @property

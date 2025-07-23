@@ -4,6 +4,7 @@
 ### Specific application ###
 *.db
 config.json
+data_poids
 
 ### macOS ###
 # General

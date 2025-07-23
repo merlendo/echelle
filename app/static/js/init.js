@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, { edge: 'right' });
+    const sidenavElems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenavElems, { edge: 'right' });
+
+    const modalElems = document.querySelectorAll('.modal');
+    M.Modal.init(modalElems, { inDuration: 0, outDuration: 0 });
+
+    const selectElems = document.querySelectorAll('select');
+    M.FormSelect.init(selectElems);
 });
